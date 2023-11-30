@@ -1,85 +1,157 @@
-use std::io;
+use std::{format, io};
 
 fn main() {
-    let mut input = String::new();
-    let mut input1 = String::new();
-    let mut input2= String::new();
-    let mut input3 = String::new();
-    let mut input4 = String::new();
-    let mut input5 = String::new();
-    let mut input6 = String::new();
-    let mut input7 = String::new();
-    let mut input8 = String::new();
-    let mut input9 = String::new();
-    let mut input10 = String::new();
-    let mut input11 = String::new();
-    let mut input12 = String::new();
-    let mut input13 = String::new();
-    let mut input14 = String::new();
-    let mut input15 = String::new();
-    let mut input16 = String::new();
-    println!("how many siblings do you have");
-    io::stdin().read_line(&mut input).expect("input a digit");
-    let nom:i64 = input.trim().parse().expect("not an integer");
+    let input = io::stdin();
+    let mut num = String::new();
 
-    for _ in 0..nom{
+    println!("How many siblings do you have? (Not more than 20):");
+    input.read_line(&mut num).expect("Not a valid string!");
+    let num:usize = num.trim().parse().expect("Not a valid integer!");
 
-        println!("enter name of sibling");
-        io::stdin().read_line(&mut input).expect("can't read character");
-        let name = input1.trim();
+    let mut sibling_info:[[String;5];20] = [["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()],
+        ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()]];
 
-        println!("enter age of sibling");
-        io::stdin().read_line(&mut input2).expect("can't read character");
-        let age:i64 = input2.trim().parse().expect("can't read character");
+    for i in 0..num {
+        sibling_info[i] = builder();
+    }
 
-        if age > 18 {
-            println!("what is your marital status??(married/single)");
-            io::stdin().read_line(&mut input3).expect("not a character");
-            let marital_status = input3.trim();
-
-            if marital_status == "single"{
-                println!("what is employment status??(employed/student)");
-                io::stdin().read_line(&mut input4).expect("invalid");
-                let employment_status = input4.trim();
-
-                if employment_status == "student" {
-                    println!("what university does he/she attend??");
-                    io::stdin().read_line(&mut input5).expect("invalid");
-                    let university = input5.trim();
-
-                    println!("what course is he/she studying??");
-                    io::stdin().read_line(&mut input6).expect("invalid");
-                    let course = input6.trim();
-                }else if employment_status == "employed"{
-                    println!("where does he/she work??");
-                    io::stdin().read_line(&mut input11).expect("invalid");
-                    let work_place = input11.trim();
-                }
-            }else if marital_status == "married"{
-                println!("does he/she have kids??");
-                io::stdin().read_line(&mut input7).expect("invalid");
-                let any_kids = input7.trim();
-
-                println!("where do they base with their family??");
-                io::stdin().read_line(&mut input7).expect("invalid");
-                let base = input8.trim();
-            }else {
-                println!("not part of requirements");
-            }
-        }else if age < 18 {
-            println!("has he/she written WAEC??(yes/no)");
-            io::stdin().read_line(&mut input8).expect("invalid");
-            let waec_status = input8.trim();
-
-            if waec_status == "yes" {
-                println!("enter name of secondary school attended");
-                io::stdin().read_line(&mut input9).expect("invalid");
-                let secondary_school = input9.trim();
-            }if waec_status == "no" {
-                println!("what class is he/she in now??");
-                io::stdin().read_line(&mut input10).expect("invalid");
-                let class = input10.trim();
+    for a in 0..num {
+        println!("");
+        println!("Sibling {}:", a+1);
+        for j in sibling_info[a].iter() {
+            if j == "" {
+                continue;
+            } else {
+                println!("{:?}", j);
             }
         }
     }
+}
+
+fn builder() -> [String;5] {
+    let input = io::stdin();
+    let mut occ = String::new();
+    let mut relation = String::new();
+    let mut name = String::new();
+    let mut age = String::new();
+    let mut arr1:[String;5] = ["".to_string(), "".to_string(), "".to_string(), "".to_string(), "".to_string()];
+
+    println!("What is your sibling's first name?:");
+    input.read_line(&mut name).expect("Not a valid string!");
+    let name = name.trim();
+
+    println!("How old is your sibling?:");
+    input.read_line(&mut age).expect("Not a valid string");
+    let age:usize = age.trim().parse().expect("Not a valid integer!");
+
+    if age > 18 {
+        let mut status = String::new();
+
+        println!("Is your sibling single or married? (Enter s or m):");
+        input.read_line(&mut status).expect("Not a valid string!");
+        let status:char = status.trim().parse().expect("Not a valid character");
+
+        if status == 's' {
+            let relation = "Single";
+            let mut job = String::new();
+
+            println!("Is your sibling a student or worker? (Enter student or worker):");
+            input.read_line(&mut job).expect("Not a valid string!");
+            let job = job.trim();
+
+            if job == "student" {
+                let occ = "Student";
+                let mut uni = String::new();
+
+                println!("What university does your sibling attend?:");
+                input.read_line(&mut uni).expect("Not a valid string!");
+                let uni = uni.trim();
+                arr1[0] = format!("Name: {}",name);
+                arr1[1] = format!("Age: {}years",age);
+                arr1[2] = format!("Marital Status: {}",relation);
+                arr1[3] = format!("Occupation: {}",occ);
+                arr1[4] = format!("School: {}",uni);
+            } else if job == "worker" {
+                let occ = "Worker";
+                arr1[0] = format!("Name: {}",name);
+                arr1[1] = format!("Age: {}years",age);
+                arr1[2] = format!("Marital Status: {}",relation);
+                arr1[3] = format!("Occupation: {}",occ);
+            } else {
+                let arr1 = ["", "", "", "", ""];
+            }
+        } else if status == 'm' {
+            let relation = "Married";
+            let mut child = String::new();
+            let mut city = String::new();
+
+            println!("How many children does your sibling have?:");
+            input.read_line(&mut child).expect("Not a valid string!");
+            let child:usize = child.trim().parse().expect("Not a valid integer!");
+
+            println!("What city does your sibling live in?:");
+            input.read_line(&mut city).expect("Not a valid string!");
+            let city = city.trim();
+            arr1[0] = format!("Name: {}",name);
+            arr1[1] = format!("Age: {}years",age);
+            arr1[2] = format!("Marital Status: {}",relation);
+            arr1[3] = format!("City: {}",city);
+            arr1[4] = format!("Number of children: {}",child);
+        } else {
+            let arr1 = ["", "", "", "", ""];
+        }
+    } else {
+        let mut waec = String::new();
+
+        println!("Has your sibling written WASSCE? (Enter true or false):");
+        input.read_line(&mut waec).expect("Not a valid string!");
+        let waec = waec.trim();
+
+        if waec == "true" {
+            let wasscce = "True";
+            let mut school = String::new();
+
+            println!("What secondary school did your sibling attend?:");
+            input.read_line(&mut school).expect("Not a valid string!");
+            let school = school.trim();
+
+            arr1[0] = format!("Name: {}",name);
+            arr1[1] = format!("Age: {}years",age);
+            arr1[2] = format!("WAEC?: {}",wasscce);
+            arr1[3] = format!("School: {}",school);
+        } else if waec == "false" {
+            let wasscce = "False";
+            let mut class = String::new();
+
+            println!("What class is your sibling in?:");
+            input.read_line(&mut class).expect("Not a valid string");
+            let class = class.trim();
+
+            arr1[0] = format!("Name: {}",name);
+            arr1[1] = format!("Age: {}years",age);
+            arr1[2] = format!("WAEC?: {}",wasscce);
+            arr1[3] = format!("Class: {}",class);
+        } else {
+            let arr1 = ["", "", "", "", ""];
+        }
+    }
+    return arr1;
 }
