@@ -1,0 +1,6 @@
+Name of Commisioner	 Ministry	 Geopolitical Zone	
+Aigbodun Alamba Daudu	internal affairs	south west	
+Murtala Afeez Bendu	justice	north east	
+Okorocha Calistus	defense	south south	
+Adewale Jimoh Akanbi	power & steel	south west	
+Osazuwa Faith Etieye	petroleum	south east	
